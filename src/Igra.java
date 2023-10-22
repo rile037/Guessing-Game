@@ -35,8 +35,9 @@ public class Igra {
         public void dodeliNagradu(Korisnik korisnik){
             int pogodjeni = korisnik.getBrojPogodjenihBrojeva();
             if(nagrade.containsKey(pogodjeni)){
-                System.out.println("Dobitak je x" + pogodjeni);
-                korisnik.setNagrada(korisnik.getOpklada() * korisnik.getBrojPogodjenihBrojeva());
+                double nagrada = korisnik.getOpklada() * nagrade.get(korisnik.getBrojPogodjenihBrojeva());
+                 System.out.println("Dobitak je x" + nagrade.get(korisnik.getBrojPogodjenihBrojeva()));
+                korisnik.setNagrada(nagrada);
                 System.out.println("Osvojili ste: " + korisnik.getNagrada() + " rsd.");
             }
         }

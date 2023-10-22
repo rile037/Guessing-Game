@@ -14,7 +14,7 @@ public class Main {
             try {
                 if (scanner.hasNextInt()) {
                     int broj = scanner.nextInt();
-                    if (broj <= 48 && broj >= 1) {
+                    if (broj <= 46 && broj >= 1) {
                         korisnik.dodajBroj(broj);
                         System.out.println("[" + korisnik.getMojiBrojevi().size() + "/6]");
                     } else {
