@@ -1,8 +1,6 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
+import java.util.ArrayList;
 
 public class Server {
     public static void main(String[] args) {
@@ -12,23 +10,37 @@ public class Server {
             System.out.println("Server je pokrenut i sluša na portu " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Novi klijent povezan: " + clientSocket.getInetAddress());
+                System.out.println("\nNovi klijent povezan: " + clientSocket.getInetAddress());
 
-                InputStream input = clientSocket.getInputStream();
-                OutputStream output = clientSocket.getOutputStream();
+                // Kreiranje nove niti za svakog klijenta
+                Thread clientThread = new Thread(() -> {
+                    try {
+                        InputStream input = clientSocket.getInputStream();
+                        OutputStream output = clientSocket.getOutputStream();
 
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    String receivedData = new String(buffer, 0, bytesRead);
-                    System.out.println("Primljeno od klijenta: " + receivedData);
+                        Igra igra = new Igra();
+                        System.out.println("\n\nIzvuceni brojevi: ");
+                        for(Integer izvucenBroj : igra.getIzvuceniBrojevi()){
+                            System.out.print(izvucenBroj + ", ");
+                        }
+                        ObjectOutputStream objZaSlanje = new ObjectOutputStream(clientSocket.getOutputStream());
+                        ArrayList<Integer> listaDobitnihBrojeva = new ArrayList<>();
+                        listaDobitnihBrojeva = igra.getIzvuceniBrojevi();
+                        objZaSlanje.writeObject(listaDobitnihBrojeva);
 
-                    // Ovde možete obraditi podatke i poslati odgovor nazad klijentu
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            clientSocket.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                clientThread.start();
 
-                    // Primer odgovora
-                    String response = "Odgovor od servera";
-                    output.write(response.getBytes());
-                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
