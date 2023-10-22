@@ -2,13 +2,27 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    private static int pogodjeni;
+    private static int pogodjeni; // Privatna promenljiva koja sadrzi broj pogodjenih brojeva
 
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        Korisnik korisnik = new Korisnik();
-        System.out.println("Unesite opkladu: ");
-        korisnik.setOpklada(scanner.nextInt());
+        Scanner scanner = new Scanner(System.in); // Inicijalizujemo objekat skener
+        Korisnik korisnik = new Korisnik(); // Inicijalizujemo objekat korisnik
+
+
+        while(korisnik.getOpklada() < 1){
+            try{
+                if(scanner.hasNextInt()){
+                    korisnik.setOpklada(scanner.nextInt()); // Smestamo
+                }else{
+                    System.out.println("Opklada mora biti broj.");
+                    scanner.next();
+                }
+            }
+            catch (InputMismatchException e){
+                System.out.println("Greska");
+            }
+        }
+
         System.out.println("Unesite 6 vasih brojeva (Raspon: 1 - 46): ");
         while(korisnik.getMojiBrojevi().size() != 6) {
             try {
@@ -30,10 +44,6 @@ public class Main {
                 scanner.next();
             }
         }
-//        System.out.println("Vasi brojevi: ");
-//        for (Integer broj : korisnik.getMojiBrojevi()) {
-//            System.out.println(broj);
-//        }
 
         Igra igra = new Igra();
         Igra.Nagrada nagrada = new Igra.Nagrada();
