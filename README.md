@@ -3,8 +3,11 @@
 Projekat "Igra Pogadjanja" predstavlja jednostavnu igru u kojoj korisnici biraju brojeve i ulažu opklade, a zatim server izvlači dobitne brojeve i dodeljuje nagrade na osnovu broja pogodjenih brojeva. Ova igra se izvodi uz pomoć komunikacije između klijenta i servera, omogućavajući korisnicima da igraju i osvajaju nagrade.
 
 ## Fotografije
+### Dobitak nagrade
 ![dobitak i nagrada](https://github.com/rile037/Guessing-Game/assets/60843900/3948a3ab-dd5d-4770-a227-49b7d226ad97)
+### Oplakada i brojevi
 ![opklada i brojevi](https://github.com/rile037/Guessing-Game/assets/60843900/cb44c5fc-93d1-462b-b034-605b85b4fc0c)
+### Server i vracanje brojeva
 ![server i vracanje brojeva](https://github.com/rile037/Guessing-Game/assets/60843900/7772448a-9317-425b-8b63-237c55c02b47)
 
 ## Funkcionalnosti
