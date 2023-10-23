@@ -41,6 +41,9 @@ Projekat se zasniva na Java programiranju i koristi komunikaciju između klijent
 
 4. Nakon izvlačenja dobitnih brojeva, server će dodeliti nagrade korisnicima.
 
+## Šematski prikaz komunikacije
+![Igra pogadjanja](https://github.com/rile037/Guessing-Game/assets/60843900/1cc48476-ed0d-4f51-b5b2-f53750981cf6)
+
 
 ## Licenca
 
