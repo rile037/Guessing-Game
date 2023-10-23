@@ -5,42 +5,40 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.ObjectInputStream;
 
-public class Klijent{
+public class Klijent {
     public static void main(String[] args) {
-        String serverAddress = "localhost";
-        int serverPort = 12345;
+        String serverAddress = "localhost"; // Adresa servera
+        int serverPort = 12345; // Port na kojem se server nalazi
 
-        Scanner scanner = new Scanner(System.in); // Inicijalizujemo objekat skener
-        Korisnik korisnik = new Korisnik(1);
+        Scanner scanner = new Scanner(System.in); // Inicijalizacija skenera za unos podataka
+        Korisnik korisnik = new Korisnik(1); // Kreiranje korisnika (objekta)
 
         System.out.println("Unesite vasu opkladu u dinarima: ");
-        while(korisnik.getOpklada() < 1){
-            try{
-                if(scanner.hasNextInt()){
-                    korisnik.setOpklada(scanner.nextInt()); // Smestamo
-                }else{
+        while (korisnik.getOpklada() < 1) {
+            try {
+                if (scanner.hasNextInt()) {
+                    korisnik.setOpklada(scanner.nextInt()); // Postavljanje opklade korisnika
+                } else {
                     System.out.println("Opklada mora biti broj.");
                     scanner.next();
                 }
-            }
-            catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Greska");
             }
         }
 
         System.out.println("Unesite 6 vasih brojeva (Raspon: 1 - 46): ");
-        while(korisnik.getMojiBrojevi().size() != 6) {
+        while (korisnik.getMojiBrojevi().size() != 6) {
             try {
                 if (scanner.hasNextInt()) {
                     int broj = scanner.nextInt();
                     if (broj <= 46 && broj >= 1) {
-                        korisnik.dodajBroj(broj);
+                        korisnik.dodajBroj(broj); // Dodavanje broja korisnikovoj listi brojeva
                         System.out.println("[" + korisnik.getMojiBrojevi().size() + "/6]");
                     } else {
                         System.out.println("- Greska, broj nije u opsegu");
                     }
-                }
-                else{
+                } else {
                     System.out.println("- Greska, niste uneli broj");
                     scanner.next();
                 }
@@ -55,39 +53,35 @@ public class Klijent{
             System.out.print(broj + ", ");
         }
 
-
-
         try (Socket socket = new Socket(serverAddress, serverPort)) {
             InputStream input = socket.getInputStream();
             OutputStream output = socket.getOutputStream();
 
-
-
             ObjectInputStream objZaPrimanje = new ObjectInputStream(socket.getInputStream());
-                ArrayList<Integer> listaIzvucenihBrojeva = (ArrayList<Integer>) objZaPrimanje.readObject();
-                System.out.println("\nIzvuceni brojevi: ");
-                for (Integer broj : listaIzvucenihBrojeva) {
-                    System.out.print(broj + ", ");
-                }
+            ArrayList<Integer> listaIzvucenihBrojeva = (ArrayList<Integer>) objZaPrimanje.readObject();
+            System.out.println("\nIzvuceni brojevi: ");
+            for (Integer broj : listaIzvucenihBrojeva) {
+                System.out.print(broj + ", ");
+            }
             objZaPrimanje.close();
 
             int pogodjeni = 0;
-            for(Integer izvucenBroj : listaIzvucenihBrojeva){
-                for(Integer broj : korisnik.getMojiBrojevi()){
-                    if(izvucenBroj.equals(broj)){
+            for (Integer izvucenBroj : listaIzvucenihBrojeva) {
+                for (Integer broj : korisnik.getMojiBrojevi()) {
+                    if (izvucenBroj.equals(broj)) {
                         pogodjeni++;
                     }
                 }
                 korisnik.setBrojPogodjenihBrojeva(pogodjeni);
             }
 
-            Korisnik.dodajDobitneBrojeve(listaIzvucenihBrojeva,korisnik);
-            if(korisnik.getBrojPogodjenihBrojeva() < 1){
+            Korisnik.dodajDobitneBrojeve(listaIzvucenihBrojeva, korisnik);
+            if (korisnik.getBrojPogodjenihBrojeva() < 1) {
                 System.out.println("\nNiste pogodili nijedan broj, vise srece drugi put!");
-            }else{
+            } else {
                 System.out.println("\n\nPogodili ste ukupno " + korisnik.getBrojPogodjenihBrojeva() + " broja od 20 izvucenih brojeva.");
                 System.out.print("\n- Dobitni brojevi: ");
-                for(Integer broj : korisnik.getDobitneProjeve()){
+                for (Integer broj : korisnik.getDobitneProjeve()) {
                     System.out.print(broj + ", ");
                 }
                 System.out.println("\n");

@@ -12,8 +12,10 @@ public class Nagrada {
         nagrade.put(1,2);  // Broj pogodjenih 1, nagrada je novac puta 2
     }
 
+    // Metoda za dodelu nagrade korisniku
     public void dodeliNagradu(Korisnik korisnik){
         int pogodjeni = korisnik.getBrojPogodjenihBrojeva();
+        // Provera da li postoji nagrada za broj pogodjenih brojeva
         if(nagrade.containsKey(pogodjeni)){
             double nagrada = korisnik.getOpklada() * nagrade.get(korisnik.getBrojPogodjenihBrojeva());
             System.out.println("Dobitak je x" + nagrade.get(korisnik.getBrojPogodjenihBrojeva()));
