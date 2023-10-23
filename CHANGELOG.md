@@ -24,6 +24,8 @@ Klijent > Klijent.java, Korisnik.java, Nagrada.java
 ### Popravljeno
  
 - Greška prilikom ispisivanja rezultata klijentu (Klijent nije dobijao ispis svojih brojeva na kraju igre)
+
+
  
 
 ## [1.0] - 2023-22-10
