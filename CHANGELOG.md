@@ -2,7 +2,7 @@
 # Change Log
 Sve bitne promene su zabeležene u ovom dokumentu. 
  
-## [1.0] - 2023-22-10
+## [1.1] - 2023-22-10
   * commit ee374cf: **Dodate nove funkcionalnosti klijenta i servera > main**
 
 Implementirana komunikacija servera i klijenta. 
