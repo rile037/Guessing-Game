@@ -43,7 +43,7 @@ Projekat se zasniva na Java programiranju i koristi komunikaciju između klijent
 
 ## Šematski prikaz komunikacije Servera i Klijenta
 
-<img src="https://github.com/rile037/Guessing-Game/assets/60843900/1cc48476-ed0d-4f51-b5b2-f53750981cf6" width="500" height="800" alt="Šema">
+<img src="https://github.com/rile037/Guessing-Game/assets/60843900/1cc48476-ed0d-4f51-b5b2-f53750981cf6" width="700" height="800" alt="Šema">
 
 ## Licenca
 
